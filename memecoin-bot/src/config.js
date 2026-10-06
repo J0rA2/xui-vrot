@@ -1,7 +1,6 @@
 import bs58 from 'bs58';
 import 'dotenv/config'
 import { Connection, Keypair } from '@solana/web3.js'
-import bs58 from 'bs58'
 
 const need = (k) => {
   if (!process.env[k]) throw new Error(`.env-ში აკლია ${k}`)
