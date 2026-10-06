@@ -7,7 +7,7 @@ const need = (k) => {
   return process.env[k]
 }
 
-export const BOT_TOKEN = need('BOT_TOKEN')
+export const BOT_TOKEN = need('8802053755:AAG4BoI58aLZIWTAzVwjm KPkEe-Rc6LjqhI')
 export const PINATA_JWT = need('PINATA_JWT')
 export const ADMIN_IDS = (process.env.ADMIN_IDS || '')
   .split(',').map((s) => Number(s.trim())).filter(Boolean)
