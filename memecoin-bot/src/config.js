@@ -1,3 +1,4 @@
+import bs58 from 'bs58';
 import 'dotenv/config'
 import { Connection, Keypair } from '@solana/web3.js'
 import bs58 from 'bs58'
@@ -18,3 +19,13 @@ export const RPC_URL = process.env.RPC_URL ||
 
 export const owner = Keypair.fromSecretKey(bs58.decode(need('PRIVATE_KEY')))
 export const connection = new Connection(RPC_URL, 'confirmed')
+function loadKeypair(value) {
+  const raw = (value || '').trim().replace(/^["']|["']$/g, '');
+  const secret = raw.startsWith('[')
+    ? Uint8Array.from(JSON.parse(raw))
+    : bs58.decode(raw);
+  console.log('key length:', secret.length);
+  return secret.length === 32
+    ? Keypair.fromSeed(secret)
+    : Keypair.fromSecretKey(secret);
+}
