@@ -16,7 +16,10 @@ export const CLUSTER = process.env.CLUSTER === 'devnet' ? 'devnet' : 'mainnet'
 export const RPC_URL = process.env.RPC_URL ||
   (CLUSTER === 'devnet' ? 'https://api.devnet.solana.com' : 'https://api.mainnet-beta.solana.com')
 
-export const owner = Keypair.fromSecretKey(bs58.decode(need('PRIVATE_KEY')))
+const _k = bs58.decode(need('PRIVATE_KEY'));
+console.log('KEY chars:', need('PRIVATE_KEY').length, 'bytes:', _k.length);
+export const owner = Keypair.fromSecretKey(_k);
+
 export const connection = new Connection(RPC_URL, 'confirmed')
 function loadKeypair(value) {
   const raw = (value || '').trim().replace(/^["']|["']$/g, '');
