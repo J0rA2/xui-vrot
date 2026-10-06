@@ -18,7 +18,10 @@ function loadKeypair(value) {
   throw new Error(`PRIVATE_KEY არასწორია (${secret.length} ბაიტი, უნდა იყოს 64)`)
 }
 
-export const BOT_TOKEN = need('BOT_TOKEN')
+export const BOT_TOKEN = need('BOT_TOKEN').replace(/\s+/g, '').replace(/^bot/i, '')
+if (!/^\d+:[\w-]{30,}$/.test(BOT_TOKEN)) {
+  throw new Error('BOT_TOKEN არასწორი ფორმატისაა (უნდა იყოს 123456:ABC...)')
+}
 export const PINATA_JWT = need('PINATA_JWT')
 export const ADMIN_IDS = (process.env.ADMIN_IDS || '')
   .split(',').map((s) => Number(s.trim())).filter(Boolean)
